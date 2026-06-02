@@ -687,7 +687,7 @@ flashKamera();
 
 ambilFoto();
 
-alert("Check Out belum dibuat");
+showNotif("Check Out belum dibuat");
   
 }
   async function kirimCheckin(){
@@ -724,9 +724,7 @@ await response.json();
 
 if(hasil.sukses){
 
-alert(
-"✅ Check In Berhasil"
-);
+showNotif("✅ Check In Berhasil");
 
 }else{
 
@@ -927,6 +925,42 @@ btnOut.classList.add(
 );
 
 }
+
+}
+
+function showNotif(pesan){
+
+const notif =
+document.createElement("div");
+
+notif.innerHTML = pesan;
+
+notif.style.position = "fixed";
+notif.style.top = "30px";
+notif.style.left = "50%";
+notif.style.transform = "translateX(-50%)";
+
+notif.style.background = "#111";
+notif.style.color = "#fff";
+
+notif.style.padding = "16px 24px";
+notif.style.borderRadius = "14px";
+
+notif.style.fontWeight = "700";
+notif.style.fontSize = "15px";
+
+notif.style.zIndex = "99999";
+
+notif.style.boxShadow =
+"0 10px 30px rgba(0,0,0,.25)";
+
+document.body.appendChild(notif);
+
+setTimeout(()=>{
+
+notif.remove();
+
+},2500);
 
 }
   
