@@ -303,9 +303,19 @@ Riwayat Absensi Hari Ini
 </tr>
 
 <tr>
-<td>-</td>
-<td>-</td>
-<td>-</td>
+
+<td id="tglAbsen">
+-
+</td>
+
+<td id="jamMasuk">
+-
+</td>
+
+<td id="jamPulang">
+-
+</td>
+
 </tr>
 
 </table>
@@ -375,6 +385,8 @@ document.getElementById(
 user.nama;
 
 ambilLokasi();
+  
+ambilRiwayat();
   
 function logout(){
 
@@ -782,6 +794,61 @@ canvas.toDataURL(
 "image/jpeg",
 0.8
 );
+
+}
+  async function ambilRiwayat(){
+
+try{
+
+const response =
+await fetch(
+API_URL,
+{
+method:"POST",
+body:JSON.stringify({
+
+action:"riwayat",
+
+username:
+user.username
+
+})
+}
+);
+
+const hasil =
+await response.json();
+
+if(hasil.sukses){
+
+document
+.getElementById(
+"tglAbsen"
+)
+.innerHTML =
+hasil.tanggal;
+
+document
+.getElementById(
+"jamMasuk"
+)
+.innerHTML =
+hasil.masuk;
+
+document
+.getElementById(
+"jamPulang"
+)
+.innerHTML =
+hasil.pulang;
+
+}
+
+}catch(err){
+
+console.log(err);
+
+}
 
 }
   
