@@ -874,31 +874,50 @@ await response.json();
 
 if(hasil.sukses){
 
-document
-.getElementById(
-"tglAbsen"
-)
-.innerHTML =
-hasil.tanggal;
+  document
+  .getElementById(
+    "tglAbsen"
+  ).innerHTML =
+  hasil.tanggal;
 
-document
-.getElementById(
-"jamMasuk"
-)
-.innerHTML =
-hasil.masuk;
+  document
+  .getElementById(
+    "jamMasuk"
+  ).innerHTML =
+  hasil.masuk;
 
-document
-.getElementById(
-"jamPulang"
-)
-.innerHTML =
-hasil.pulang;
+  document
+  .getElementById(
+    "jamPulang"
+  ).innerHTML =
+  hasil.pulang;
 
-aturTombol(
-hasil.masuk,
-hasil.pulang
-);
+  aturTombol(
+    hasil.masuk,
+    hasil.pulang
+  );
+
+}else{
+
+  document
+  .getElementById(
+    "tglAbsen"
+  ).innerHTML = "-";
+
+  document
+  .getElementById(
+    "jamMasuk"
+  ).innerHTML = "-";
+
+  document
+  .getElementById(
+    "jamPulang"
+  ).innerHTML = "-";
+
+  aturTombol(
+    "-",
+    "-"
+  );
 
 }
 
