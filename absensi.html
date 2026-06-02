@@ -94,7 +94,20 @@ margin:20px 0 12px;
 text-align:center;
 color:#111;
 }
+.lokasi-box{
+background:#f2f2f7;
+padding:18px;
+border-radius:18px;
+margin-bottom:20px;
+text-align:center;
+}
 
+#statusLokasi{
+font-size:14px;
+color:#444;
+line-height:1.6;
+}
+  
 table{
 width:100%;
 border-collapse:collapse;
@@ -143,7 +156,18 @@ Memuat...
 <div class="subtitle">
 Silahkan lakukan absensi
 </div>
+<div id="lokasiBox" class="lokasi-box">
 
+<div class="section-title">
+Status Lokasi
+</div>
+
+<p id="statusLokasi">
+Menunggu lokasi...
+</p>
+
+</div>
+  
 <div class="camera-box">
 Kamera akan ditambahkan
 </div>
@@ -210,6 +234,8 @@ document.getElementById(
 "Selamat Datang,<br>" +
 user.nama;
 
+ambilLokasi();
+  
 function logout(){
 
 localStorage.removeItem("user");
@@ -218,7 +244,53 @@ window.location.href =
 "index.html";
 
 }
+function ambilLokasi(){
 
+const status =
+document.getElementById(
+"statusLokasi"
+);
+
+if(!navigator.geolocation){
+
+status.innerHTML =
+"GPS tidak didukung browser";
+
+return;
+
+}
+
+navigator.geolocation.getCurrentPosition(
+
+function(pos){
+
+const lat =
+pos.coords.latitude;
+
+const lng =
+pos.coords.longitude;
+
+status.innerHTML =
+
+"Latitude : " +
+lat +
+"<br><br>" +
+
+"Longitude : " +
+lng;
+
+},
+
+function(err){
+
+status.innerHTML =
+"Gagal mengambil lokasi";
+
+}
+
+);
+
+}
 </script>
 
 </body>
