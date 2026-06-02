@@ -378,43 +378,20 @@ outletDekat = outlet;
 }
 
 }
-
+const status =
 document.getElementById(
-"outletTerdekat"
-).innerHTML =
-
-"Outlet : " +
-outletDekat.nama;
-
-document.getElementById(
-"jarakOutlet"
-).innerHTML =
-
-"Jarak : " +
-Math.round(
-jarakTerdekat
-) +
-" Meter";
-  
-status.innerHTML =
-
-"Latitude : " +
-lat +
-"<br><br>" +
-
-"Longitude : " +
-lng;
-
-},
-
-function(err){
-
-status.innerHTML =
-"Gagal mengambil lokasi";
-
-}
-
+"statusLokasi"
 );
+
+if(jarakTerdekat <= 100){
+
+status.innerHTML =
+"✅ Dalam Radius Outlet";
+
+}else{
+
+status.innerHTML =
+"❌ Di Luar Radius Outlet";
 
 }
 </script>
