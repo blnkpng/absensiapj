@@ -137,13 +137,16 @@ cursor:pointer;
 }
 
 .status-badge{
-display:inline-block;
-padding:12px 20px;
-border-radius:12px;
-font-size:14px;
-font-weight:600;
-color:white;
-margin-top:10px;
+display:none;
+padding:14px 20px;
+border-radius:14px;
+font-size:15px;
+font-weight:700;
+color:#fff;
+text-align:center;
+margin:auto;
+width:fit-content;
+min-width:260px;
 }
   
 </style>
@@ -167,14 +170,9 @@ Memuat...
 Silahkan lakukan absensi
 </div>
 <div id="lokasiBox" class="lokasi-box">
-
-<div class="section-title">
-Status Lokasi
-</div>
   
 <div id="statusLokasi"
 class="status-badge">
-Memeriksa lokasi...
 </div>
 
 </div>
@@ -392,6 +390,8 @@ outletDekat = outlet;
 
 if(jarakTerdekat <= 100){
 
+status.style.display = "block";
+
 status.innerHTML =
 "Status : Siap Absen";
 
@@ -399,6 +399,8 @@ status.style.background =
 "#22c55e";
 
 }else{
+
+status.style.display = "block";
 
 status.innerHTML =
 "Status : Diluar Radius Outlet";
