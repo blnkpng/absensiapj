@@ -236,6 +236,12 @@ opacity:0;
 }
 
 }
+
+.btn-disabled{
+opacity:.4;
+pointer-events:none;
+filter:grayscale(100%);
+}
   
 </style>
 </head>
@@ -842,11 +848,83 @@ document
 .innerHTML =
 hasil.pulang;
 
+aturTombol(
+hasil.masuk,
+hasil.pulang
+);
+
 }
 
 }catch(err){
 
 console.log(err);
+
+}
+
+}
+
+function aturTombol(
+jamMasuk,
+jamPulang
+){
+
+const btnIn =
+document.getElementById(
+"btnCheckin"
+);
+
+const btnOut =
+document.getElementById(
+"btnCheckout"
+);
+
+if(
+jamMasuk === "-"
+){
+
+btnIn.classList.remove(
+"btn-disabled"
+);
+
+btnOut.classList.add(
+"btn-disabled"
+);
+
+return;
+
+}
+
+if(
+jamMasuk !== "-"
+&&
+jamPulang === "-"
+){
+
+btnIn.classList.add(
+"btn-disabled"
+);
+
+btnOut.classList.remove(
+"btn-disabled"
+);
+
+return;
+
+}
+
+if(
+jamMasuk !== "-"
+&&
+jamPulang !== "-"
+){
+
+btnIn.classList.add(
+"btn-disabled"
+);
+
+btnOut.classList.add(
+"btn-disabled"
+);
 
 }
 
