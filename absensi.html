@@ -687,7 +687,7 @@ flashKamera();
 
 ambilFoto();
 
-showNotif("Check Out belum dibuat");
+await kirimCheckout();
   
 }
   async function kirimCheckin(){
@@ -743,8 +743,57 @@ alert(
 }
 
 }
+
+async function kirimCheckout(){
+
+try{
+
+const response =
+await fetch(
+API_URL,
+{
+method:"POST",
+body:JSON.stringify({
+
+action:"checkout",
+
+username:
+user.username
+
+})
+}
+);
+
+const hasil =
+await response.json();
+
+if(hasil.sukses){
+
+showNotif(
+"✅ Check Out Berhasil"
+);
+
+ambilRiwayat();
+
+}else{
+
+showNotif(
+hasil.pesan
+);
+
+}
+
+}catch(err){
+
+showNotif(
+"Gagal koneksi server"
+);
+
+}
+
+}
   
-  function flashKamera(){
+function flashKamera(){
 
 const flash =
 document.createElement(
