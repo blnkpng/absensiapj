@@ -174,6 +174,68 @@ padding:14px 16px;
 }
 
 }
+
+.countdown-overlay{
+position:fixed;
+top:0;
+left:0;
+width:100%;
+height:100%;
+background:rgba(0,0,0,.85);
+
+display:none;
+
+justify-content:center;
+align-items:center;
+
+z-index:9999;
+}
+
+#countdownNumber{
+font-size:120px;
+font-weight:700;
+color:white;
+animation:pulse .8s infinite;
+}
+
+@keyframes pulse{
+
+0%{
+transform:scale(1);
+}
+
+50%{
+transform:scale(1.15);
+}
+
+100%{
+transform:scale(1);
+}
+
+}
+
+.flash{
+position:fixed;
+top:0;
+left:0;
+width:100%;
+height:100%;
+background:white;
+z-index:10000;
+animation:flash .25s;
+}
+
+@keyframes flash{
+
+0%{
+opacity:1;
+}
+
+100%{
+opacity:0;
+}
+
+}
   
 </style>
 </head>
@@ -211,30 +273,18 @@ muted>
 </video>
 
 </div>
-<button
-id="btnFoto"
-class="btn">
-📸 Ambil Foto
-</button>
 
-<img
-id="previewFoto"
-style="
-display:none;
-width:100%;
-border-radius:20px;
-margin-top:15px;
-">
-  
 <div class="btn-group">
 
 <button
-class="btn">
+class="btn"
+id="btnCheckin">
 Check In
 </button>
 
 <button
-class="btn">
+class="btn"
+id="btnCheckout">
 Check Out
 </button>
 
@@ -515,15 +565,114 @@ console.log(error);
 
 hidupkanKamera();
 
-const canvas =
-document.createElement("canvas");
-
 document
-.getElementById("btnFoto")
+.getElementById("btnCheckin")
 .addEventListener(
 "click",
-ambilFoto
+mulaiCheckin
 );
+
+async function mulaiCheckin(){
+
+const overlay =
+document.getElementById(
+"countdownOverlay"
+);
+
+const angka =
+document.getElementById(
+"countdownNumber"
+);
+
+overlay.style.display =
+"flex";
+
+for(let i=3;i>=1;i--){
+
+angka.innerHTML = i;
+
+await new Promise(
+r=>setTimeout(r,1000)
+);
+
+}
+
+overlay.style.display =
+"none";
+
+flashKamera();
+
+ambilFoto();
+
+}
+
+// ===== CHECK OUT =====
+
+document
+.getElementById("btnCheckout")
+.addEventListener(
+"click",
+mulaiCheckout
+);
+
+async function mulaiCheckout(){
+
+const overlay =
+document.getElementById(
+"countdownOverlay"
+);
+
+const angka =
+document.getElementById(
+"countdownNumber"
+);
+
+overlay.style.display =
+"flex";
+
+for(let i=3;i>=1;i--){
+
+angka.innerHTML = i;
+
+await new Promise(
+r=>setTimeout(r,1000)
+);
+
+}
+
+overlay.style.display =
+"none";
+
+flashKamera();
+
+ambilFoto();
+
+}
+  
+  function flashKamera(){
+
+const flash =
+document.createElement(
+"div"
+);
+
+flash.className =
+"flash";
+
+document.body.appendChild(
+flash
+);
+
+setTimeout(()=>{
+
+flash.remove();
+
+},250);
+
+}
+
+const canvas =
+document.createElement("canvas");
 
 function ambilFoto(){
 
@@ -547,25 +696,23 @@ video,
 0
 );
 
-const foto =
+fotoAbsensi =
 canvas.toDataURL(
 "image/jpeg",
 0.8
 );
 
-const preview =
-document.getElementById(
-"previewFoto"
-);
-
-preview.src = foto;
-
-preview.style.display =
-"block";
-
 }
   
 </script>
+  
+<div id="countdownOverlay" class="countdown-overlay">
 
+<div id="countdownNumber">
+3
+</div>
+
+</div>
+  
 </body>
 </html>
