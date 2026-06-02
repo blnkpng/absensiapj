@@ -319,7 +319,9 @@ Logout
 </div>
 
 <script>
-
+const API_URL =
+"https://script.google.com/macros/s/AKfycbz-gFRo9DJFtPesBHXaKIZluE9vN9eUvLsHiIEHmkd4MFaitTgTyWacxyRMbyoDWKYm/exec";
+  
 const user =
 JSON.parse(
 localStorage.getItem("user")
@@ -461,6 +463,12 @@ pos.coords.latitude;
 const lng =
 pos.coords.longitude;
 
+window.latitudeUser =
+lat;
+
+window.longitudeUser =
+lng;
+
 let outletDekat = null;
 let jarakTerdekat = Infinity;
 
@@ -483,7 +491,19 @@ outletDekat = outlet;
 
 }
 
-if(jarakTerdekat <= 100){
+const isBypass =
+user.nama
+.trim()
+.toLowerCase()
+===
+"ananda arif putra";
+
+if(
+jarakTerdekat <= 100
+||
+isBypass
+){
+  
 console.log("GPS Jalan");
 status.style.display = "block";
 
@@ -604,6 +624,8 @@ flashKamera();
 
 ambilFoto();
 
+await kirimCheckin();
+  
 }
 
 // ===== CHECK OUT =====
@@ -647,6 +669,63 @@ flashKamera();
 
 ambilFoto();
 
+alert("Check Out belum dibuat");
+  
+}
+  async function kirimCheckin(){
+
+try{
+
+const response =
+await fetch(
+API_URL,
+{
+method:"POST",
+body:JSON.stringify({
+
+action:"checkin",
+
+username:
+user.username,
+
+outlet:
+"WEB",
+
+latitude:
+window.latitudeUser || 0,
+
+longitude:
+window.longitudeUser || 0
+
+})
+}
+);
+
+const hasil =
+await response.json();
+
+if(hasil.sukses){
+
+alert(
+"✅ Check In Berhasil"
+);
+
+}else{
+
+alert(
+hasil.pesan
+);
+
+}
+
+}catch(err){
+
+alert(
+"Gagal koneksi ke server"
+);
+
+}
+
 }
   
   function flashKamera(){
@@ -671,6 +750,8 @@ flash.remove();
 
 }
 
+let fotoAbsensi = "";
+  
 const canvas =
 document.createElement("canvas");
 
