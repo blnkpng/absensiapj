@@ -474,12 +474,14 @@ if(
 !username ||
 !password
 ){
-alert("Lengkapi data");
+hideLoading();
+showToast("Lengkapi data");
 return;
 }
 
 if(password !== confirm){
-alert("Konfirmasi password tidak cocok");
+hideLoading();
+showToast("Konfirmasi password tidak cocok");
 return;
 }
 
@@ -526,7 +528,8 @@ if(
 !username ||
 !password
 ){
-alert("Lengkapi data login");
+hideLoading();
+showToast("Lengkapi data login");
 return;
 }
 
@@ -549,7 +552,9 @@ password:password
 
 const hasil =
 await response.json();
+
 hideLoading();
+
 if(hasil.sukses){
 
 localStorage.setItem(
@@ -568,8 +573,6 @@ window.location.href =
 "dashboard.html";
 
 },1000);
-
-}
 
 }else{
 
