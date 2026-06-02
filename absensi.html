@@ -139,16 +139,30 @@ cursor:pointer;
 
 .status-badge{
 display:none;
-padding:16px 28px;
+padding:14px 20px;
 border-radius:16px;
-font-size:16px;
+font-size:15px;
 font-weight:700;
 color:white !important;
 text-align:center;
-margin:0 auto 30px auto;
-width:fit-content;
-min-width:320px;
+margin:0 auto 40px auto;
+
+width:100%;
+max-width:320px;
+
 box-shadow:0 8px 24px rgba(0,0,0,.12);
+}
+
+@media(max-width:480px){
+
+.status-badge{
+
+max-width:100%;
+font-size:14px;
+padding:14px 16px;
+
+}
+
 }
   
 </style>
