@@ -211,7 +211,21 @@ muted>
 </video>
 
 </div>
+<button
+id="btnFoto"
+class="btn">
+📸 Ambil Foto
+</button>
 
+<img
+id="previewFoto"
+style="
+display:none;
+width:100%;
+border-radius:20px;
+margin-top:15px;
+">
+  
 <div class="btn-group">
 
 <button
@@ -319,7 +333,7 @@ window.location.href =
 
 }
   
-  function hitungJarak(
+function hitungJarak(
 lat1,
 lon1,
 lat2,
@@ -420,7 +434,7 @@ outletDekat = outlet;
 }
 
 if(jarakTerdekat <= 100){
-
+console.log("GPS Jalan");
 status.style.display = "block";
 
 status.innerHTML =
@@ -451,8 +465,16 @@ status.style.color =
 
 function(error){
 
+status.style.display = "block";
+
 status.innerHTML =
-"❌ Gagal mengambil lokasi";
+"GPS Tidak Aktif";
+
+status.style.background =
+"#f59e0b";
+
+status.style.color =
+"#ffffff";
 
 }
 
@@ -492,6 +514,56 @@ console.log(error);
 }
 
 hidupkanKamera();
+
+const canvas =
+document.createElement("canvas");
+
+document
+.getElementById("btnFoto")
+.addEventListener(
+"click",
+ambilFoto
+);
+
+function ambilFoto(){
+
+const video =
+document.getElementById(
+"kamera"
+);
+
+canvas.width =
+video.videoWidth;
+
+canvas.height =
+video.videoHeight;
+
+const ctx =
+canvas.getContext("2d");
+
+ctx.drawImage(
+video,
+0,
+0
+);
+
+const foto =
+canvas.toDataURL(
+"image/jpeg",
+0.8
+);
+
+const preview =
+document.getElementById(
+"previewFoto"
+);
+
+preview.src = foto;
+
+preview.style.display =
+"block";
+
+}
   
 </script>
 
