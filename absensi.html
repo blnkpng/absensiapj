@@ -161,7 +161,14 @@ Silahkan lakukan absensi
 <div class="section-title">
 Status Lokasi
 </div>
+<p id="outletTerdekat">
+Outlet : -
+</p>
 
+<p id="jarakOutlet">
+Jarak : -
+</p>
+  
 <p id="statusLokasi">
 Menunggu lokasi...
 </p>
@@ -221,6 +228,40 @@ JSON.parse(
 localStorage.getItem("user")
 );
 
+const outlets = [
+
+{
+nama:"Lahor",
+lat:-7.868505342051650,
+lng:112.51903200122700
+},
+
+{
+nama:"Senisono",
+lat:-7.873045159816740,
+lng:112.52751812337700
+},
+
+{
+nama:"Pujon",
+lat:-7.842424279801180,
+lng:112.46738165616400
+},
+
+{
+nama:"Ngujung",
+lat:-7.864311319138000,
+lng:112.55107532480400
+},
+
+{
+nama:"Pokopek",
+lat:-7.892148877707100,
+lng:112.54136652674100
+}
+
+];
+  
 if(!user){
 
 window.location.href =
@@ -244,6 +285,59 @@ window.location.href =
 "index.html";
 
 }
+  
+  function hitungJarak(
+lat1,
+lon1,
+lat2,
+lon2
+){
+
+const R = 6371000;
+
+const dLat =
+(lat2-lat1) *
+Math.PI/180;
+
+const dLon =
+(lon2-lon1) *
+Math.PI/180;
+
+const a =
+
+Math.sin(dLat/2) *
+Math.sin(dLat/2)
+
++
+
+Math.cos(
+lat1*Math.PI/180
+)
+
+*
+
+Math.cos(
+lat2*Math.PI/180
+)
+
+*
+
+Math.sin(dLon/2)
+*
+Math.sin(dLon/2);
+
+const c =
+
+2 *
+Math.atan2(
+Math.sqrt(a),
+Math.sqrt(1-a)
+);
+
+return R*c;
+
+}
+  
 function ambilLokasi(){
 
 const status =
@@ -270,6 +364,45 @@ pos.coords.latitude;
 const lng =
 pos.coords.longitude;
 
+let outletDekat = null;
+let jarakTerdekat = Infinity;
+
+for(const outlet of outlets){
+
+const jarak =
+hitungJarak(
+lat,
+lng,
+outlet.lat,
+outlet.lng
+);
+
+if(jarak < jarakTerdekat){
+
+jarakTerdekat = jarak;
+outletDekat = outlet;
+
+}
+
+}
+
+document.getElementById(
+"outletTerdekat"
+).innerHTML =
+
+"Outlet : " +
+outletDekat.nama;
+
+document.getElementById(
+"jarakOutlet"
+).innerHTML =
+
+"Jarak : " +
+Math.round(
+jarakTerdekat
+) +
+" Meter";
+  
 status.innerHTML =
 
 "Latitude : " +
