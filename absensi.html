@@ -378,10 +378,6 @@ outletDekat = outlet;
 }
 
 }
-const status =
-document.getElementById(
-"statusLokasi"
-);
 
 if(jarakTerdekat <= 100){
 
@@ -392,6 +388,19 @@ status.innerHTML =
 
 status.innerHTML =
 "❌ Di Luar Radius Outlet";
+
+}
+
+},
+
+function(error){
+
+status.innerHTML =
+"❌ Gagal mengambil lokasi";
+
+}
+
+);
 
 }
 </script>
