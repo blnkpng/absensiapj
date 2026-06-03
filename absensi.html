@@ -766,7 +766,13 @@ body:JSON.stringify({
 
   username:user.username,
 
-  foto:fotoAbsensi
+  foto:fotoAbsensi,
+
+  latitude:
+  window.latitudeUser || 0,
+
+  longitude:
+  window.longitudeUser || 0
 
 })
 }
