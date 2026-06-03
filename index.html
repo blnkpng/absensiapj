@@ -505,9 +505,47 @@ password:password
 
 const hasil =
 await response.json();
+
 hideLoading();
-showToast(hasil.pesan);
-hideLoading();
+
+if(hasil.sukses){
+
+showToast(
+"Pendaftaran berhasil"
+);
+
+setTimeout(()=>{
+
+document.getElementById(
+"loginTab"
+).click();
+
+document.getElementById(
+"regNama"
+).value = "";
+
+document.getElementById(
+"regUsername"
+).value = "";
+
+document.getElementById(
+"registerPassword"
+).value = "";
+
+document.getElementById(
+"confirmPassword"
+).value = "";
+
+},1500);
+
+}else{
+
+showToast(
+hasil.pesan
+);
+
+}
+  
 }catch(err){
 hideLoading();
 alert("Gagal koneksi ke server");
