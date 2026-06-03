@@ -342,7 +342,9 @@ const user =
 JSON.parse(
 localStorage.getItem("user")
 );
-
+let fotoAbsensi = "";
+let logoutTimer;
+  
 const outlets = [
 
 {
@@ -394,7 +396,7 @@ ambilLokasi();
 
 ambilRiwayat();
 
-resetLogoutTimer();
+// resetLogoutTimer();
   
 function logout(){
 
@@ -866,9 +868,6 @@ flash.remove();
 },250);
 
 }
-
-let fotoAbsensi = "";
-let logoutTimer;
 
 const canvas =
 document.createElement("canvas");
