@@ -391,8 +391,10 @@ document.getElementById(
 user.nama;
 
 ambilLokasi();
-  
+
 ambilRiwayat();
+
+resetLogoutTimer();
   
 function logout(){
 
@@ -400,6 +402,40 @@ localStorage.removeItem("user");
 
 window.location.href =
 "index.html";
+
+}
+
+function resetLogoutTimer(){
+
+clearTimeout(
+logoutTimer
+);
+
+logoutTimer =
+setTimeout(
+
+function(){
+
+showNotif(
+"⏰ Session berakhir"
+);
+
+localStorage.removeItem(
+"user"
+);
+
+setTimeout(()=>{
+
+window.location.href =
+"index.html";
+
+},1000);
+
+},
+
+5 * 60 * 1000
+
+);
 
 }
   
@@ -832,7 +868,8 @@ flash.remove();
 }
 
 let fotoAbsensi = "";
-  
+let logoutTimer;
+
 const canvas =
 document.createElement("canvas");
 
@@ -1047,6 +1084,26 @@ notif.remove();
 },2500);
 
 }
+
+document.addEventListener(
+"click",
+resetLogoutTimer
+);
+
+document.addEventListener(
+"mousemove",
+resetLogoutTimer
+);
+
+document.addEventListener(
+"keydown",
+resetLogoutTimer
+);
+
+document.addEventListener(
+"touchstart",
+resetLogoutTimer
+);
   
 </script>
   
