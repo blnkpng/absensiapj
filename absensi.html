@@ -690,8 +690,12 @@ ambilFoto();
 await kirimCheckout();
   
 }
-  async function kirimCheckin(){
+async function kirimCheckin(){
 
+console.log(
+fotoAbsensi
+);
+    
 try{
 
 const response =
@@ -713,7 +717,10 @@ latitude:
 window.latitudeUser || 0,
 
 longitude:
-window.longitudeUser || 0
+window.longitudeUser || 0,
+
+foto:
+fotoAbsensi
 
 })
 }
