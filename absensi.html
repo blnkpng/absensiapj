@@ -546,7 +546,9 @@ outletDekat = outlet;
 }
 
 }
-
+window.outletAktif =
+outletDekat.nama;
+  
 const isBypass =
 user.nama
 .trim()
@@ -749,7 +751,7 @@ username:
 user.username,
 
 outlet:
-"WEB",
+window.outletAktif,
 
 latitude:
 window.latitudeUser || 0,
@@ -794,6 +796,11 @@ alert(
 async function kirimCheckout(){
 
 try{
+
+console.log(
+"Outlet Aktif:",
+window.outletAktif
+);
 
 const response =
 await fetch(
